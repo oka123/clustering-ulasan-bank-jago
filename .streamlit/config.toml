@@ -1,0 +1,3 @@
+[server]
+# Nonaktifkan file watcher agar Streamlit tidak memindai __path__ submodule transformers
+fileWatcherType = "none"
