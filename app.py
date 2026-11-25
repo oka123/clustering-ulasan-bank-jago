@@ -155,8 +155,10 @@ def load_classifier():
 
 
 @st.cache_resource
-def load_sentence_embedding_model(model_name: str = "all-MiniLM-L6-v2"):
-    """Load Sentence Transformer untuk BERTopic transform."""
+def load_sentence_embedding_model(
+    model_name: str = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+):
+    """Load Sentence Transformer yang sama dengan model saat training BERTopic."""
     from sentence_transformers import SentenceTransformer
     return SentenceTransformer(model_name)
 
@@ -278,7 +280,9 @@ def _encode_for_bertopic(texts, bt_model, embedding_model):
         expected_dim = np.array(topic_embs).shape[1]
         if embeddings.shape[1] != expected_dim:
             if expected_dim == 384:
-                embeddings = load_sentence_embedding_model("all-MiniLM-L6-v2").encode(texts)
+                embeddings = load_sentence_embedding_model(
+                    "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+                ).encode(texts)
             elif expected_dim == 768:
                 embeddings = load_sentence_embedding_model("indobenchmark/indobert-base-p1").encode(texts)
     return embeddings
@@ -483,7 +487,7 @@ def main():
     # Sidebar ringkas
     with st.sidebar:
         st.markdown("### ℹ️ Info Model")
-        st.caption("• **Sentimen**: IndoBERT (`indobert-base-p1`)\n• **Topik**: BERTopic (`all-MiniLM-L6-v2`)")
+        st.caption("• **Sentimen**: IndoBERT (`indobert-base-p1`)\n• **Topik**: BERTopic (`paraphrase-multilingual-MiniLM-L12-v2`)")
         st.markdown("---")
         st.caption("Kelompok 4 - Kelas A")
 
