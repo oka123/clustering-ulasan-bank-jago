@@ -23,6 +23,7 @@ import html
 import unicodedata
 import pickle
 import warnings
+from datetime import date, datetime, timedelta
 import numpy as np
 import pandas as pd
 import streamlit as st
@@ -35,6 +36,7 @@ warnings.filterwarnings("ignore")
 MODEL_DIR = Path("model_indobert_sentimen")
 BERTOPIC_NEG_DIR = Path("model_bertopic_negatif")
 BERTOPIC_POS_DIR = Path("model_bertopic_positif")
+PLAYSTORE_APP_ID = "com.jago.digitalBanking"
 MAX_LEN = 128
 
 # Pemetaan nama cluster BERTopic berdasarkan kata kunci dominan di tiap topik
@@ -466,6 +468,142 @@ def analyze_reviews_batch(
     return pd.DataFrame(rows)
 
 
+def scrape_playstore_reviews(
+    start_date,
+    end_date,
+    max_reviews: int = 100,
+    app_id: str = PLAYSTORE_APP_ID,
+    progress_callback=None,
+) -> pd.DataFrame:
+    """Ambil ulasan dari Google Play Store dengan filter rentang tanggal inklusif."""
+    if isinstance(start_date, datetime):
+        start_date = start_date.date()
+    if isinstance(end_date, datetime):
+        end_date = end_date.date()
+
+    if start_date > end_date:
+        raise ValueError("Tanggal mulai tidak boleh lebih besar daripada tanggal akhir.")
+    if max_reviews <= 0:
+        raise ValueError("Batas maksimal ulasan harus lebih dari 0.")
+
+    from google_play_scraper import Sort, reviews
+
+    columns = ["tanggal", "userName", "score", "ulasan", "thumbsUpCount"]
+    collected = []
+    continuation_token = None
+    max_pages = 50  # Pengaman agar tidak looping tanpa batas pada rentang tanggal lampau
+
+    for _ in range(max_pages):
+        try:
+            batch, continuation_token = reviews(
+                app_id,
+                lang="id",
+                country="id",
+                sort=Sort.NEWEST,
+                count=100,
+                continuation_token=continuation_token,
+            )
+        except Exception as exc:
+            raise RuntimeError(f"Gagal mengambil data dari Google Play Store: {exc}") from exc
+
+        if not batch:
+            break
+
+        oldest_in_batch = None
+        for item in batch:
+            review_dt = item.get("at")
+            if isinstance(review_dt, datetime):
+                review_d = review_dt.date()
+            elif isinstance(review_dt, date):
+                review_d = review_dt
+            else:
+                continue
+
+            if oldest_in_batch is None or review_d < oldest_in_batch:
+                oldest_in_batch = review_d
+
+            if start_date <= review_d <= end_date:
+                collected.append(
+                    {
+                        "tanggal": review_dt.strftime("%Y-%m-%d %H:%M")
+                        if isinstance(review_dt, datetime)
+                        else str(review_d),
+                        "userName": item.get("userName", ""),
+                        "score": int(item.get("score", 0) or 0),
+                        "ulasan": str(item.get("content") or ""),
+                        "thumbsUpCount": int(item.get("thumbsUpCount", 0) or 0),
+                    }
+                )
+                if len(collected) >= max_reviews:
+                    break
+
+        if progress_callback:
+            progress_callback(min(len(collected) / max_reviews, 0.95))
+
+        # Berhenti otomatis jika target tercapai, halaman habis, atau ulasan sudah lebih lama dari start_date
+        if (
+            len(collected) >= max_reviews
+            or continuation_token is None
+            or (oldest_in_batch is not None and oldest_in_batch < start_date)
+        ):
+            break
+
+    if progress_callback:
+        progress_callback(1.0)
+
+    if not collected:
+        return pd.DataFrame(columns=columns)
+
+    return pd.DataFrame(collected, columns=columns)
+
+
+def _render_batch_analysis_results(result_df: pd.DataFrame, out_stem: str, key_prefix: str) -> None:
+    """Tampilkan ringkasan sentimen, distribusi topik cluster, tabel hasil, dan tombol download CSV."""
+    st.markdown("---")
+    st.markdown("### 📊 Ringkasan Hasil Analisis")
+
+    total_rows = len(result_df)
+    pos_count = int((result_df["Sentimen"] == "Positif").sum())
+    neg_count = int((result_df["Sentimen"] == "Negatif").sum())
+
+    col_tot, col_pos, col_neg = st.columns(3)
+    col_tot.metric("Total Ulasan", f"{total_rows:,}")
+    col_pos.metric(
+        "Sentimen Positif",
+        f"{pos_count:,}",
+        f"{(pos_count / total_rows * 100):.1f}%" if total_rows else "0.0%",
+    )
+    col_neg.metric(
+        "Sentimen Negatif",
+        f"{neg_count:,}",
+        f"{(neg_count / total_rows * 100):.1f}%" if total_rows else "0.0%",
+    )
+
+    valid_topic_df = result_df[result_df["Sentimen"].isin(["Positif", "Negatif"])]
+    if not valid_topic_df.empty:
+        dist_df = (
+            valid_topic_df.groupby(["Sentimen", "Cluster", "Nama Topik"], as_index=False)
+            .size()
+            .rename(columns={"size": "Jumlah Ulasan"})
+            .sort_values(["Sentimen", "Jumlah Ulasan"], ascending=[True, False])
+        )
+        with st.expander("📈 Distribusi Topik Cluster", expanded=True):
+            st.dataframe(dist_df, use_container_width=True, hide_index=True)
+
+    st.markdown("#### 📄 Hasil Lengkap per Ulasan")
+    st.dataframe(result_df, use_container_width=True, hide_index=True)
+
+    csv_bytes = result_df.to_csv(index=False).encode("utf-8-sig")
+    st.download_button(
+        label="⬇️ Download Hasil Analisis (CSV)",
+        data=csv_bytes,
+        file_name=f"hasil_analisis_{out_stem}.csv",
+        mime="text/csv",
+        use_container_width=True,
+        key=f"{key_prefix}_download_csv",
+    )
+
+
 # ==================== STREAMLIT UI ====================
 def main():
     st.set_page_config(
@@ -508,8 +646,10 @@ def main():
         embedding_model = load_sentence_embedding_model()
         bertopic_models = load_bertopic_models(embedding_model)
 
-    # Tab input: satuan vs upload file CSV/Excel
-    tab_text, tab_file = st.tabs(["✍️ Input Teks", "📁 Upload CSV / Excel"])
+    # Tab input: satuan, upload file CSV/Excel, dan ambil data Play Store
+    tab_text, tab_file, tab_playstore = st.tabs(
+        ["✍️ Input Teks", "📁 Upload CSV / Excel", "📱 Ambil Data Play Store"]
+    )
 
     with tab_text:
         user_input = st.text_area(
@@ -638,50 +778,148 @@ def main():
                     st.session_state.get("batch_result_key") == batch_cache_key
                     and "batch_result_df" in st.session_state
                 ):
-                    result_df = st.session_state["batch_result_df"]
-                    st.markdown("---")
-                    st.markdown("### 📊 Ringkasan Hasil Analisis File")
-
-                    total_rows = len(result_df)
-                    pos_count = int((result_df["Sentimen"] == "Positif").sum())
-                    neg_count = int((result_df["Sentimen"] == "Negatif").sum())
-
-                    col_tot, col_pos, col_neg = st.columns(3)
-                    col_tot.metric("Total Ulasan", f"{total_rows:,}")
-                    col_pos.metric(
-                        "Sentimen Positif",
-                        f"{pos_count:,}",
-                        f"{(pos_count / total_rows * 100):.1f}%" if total_rows else "0.0%",
-                    )
-                    col_neg.metric(
-                        "Sentimen Negatif",
-                        f"{neg_count:,}",
-                        f"{(neg_count / total_rows * 100):.1f}%" if total_rows else "0.0%",
+                    _render_batch_analysis_results(
+                        st.session_state["batch_result_df"],
+                        Path(uploaded_file.name).stem,
+                        "upload_batch",
                     )
 
-                    # Ringkasan distribusi cluster per sentimen
-                    valid_topic_df = result_df[result_df["Sentimen"].isin(["Positif", "Negatif"])]
-                    if not valid_topic_df.empty:
-                        dist_df = (
-                            valid_topic_df.groupby(["Sentimen", "Cluster", "Nama Topik"], as_index=False)
-                            .size()
-                            .rename(columns={"size": "Jumlah Ulasan"})
-                            .sort_values(["Sentimen", "Jumlah Ulasan"], ascending=[True, False])
+    with tab_playstore:
+        st.caption(
+            f"Ambil ulasan aplikasi Bank Jago (`{PLAYSTORE_APP_ID}`) dari Google Play Store berdasarkan filter tanggal sebagai input analisis."
+        )
+
+        today = date.today()
+        default_start = today - timedelta(days=30)
+
+        p_col1, p_col2, p_col3 = st.columns(3)
+        start_date = p_col1.date_input(
+            "Tanggal Mulai",
+            value=default_start,
+            max_value=today,
+            key="ps_start_date",
+        )
+        end_date = p_col2.date_input(
+            "Tanggal Akhir",
+            value=today,
+            max_value=today,
+            key="ps_end_date",
+        )
+        max_reviews = int(
+            p_col3.number_input(
+                "Maksimal Ulasan",
+                min_value=10,
+                max_value=500,
+                value=100,
+                step=10,
+                key="ps_max_reviews",
+            )
+        )
+
+        fetch_btn = st.button(
+            "🔄 Ambil Ulasan Play Store",
+            type="primary",
+            use_container_width=True,
+            key="ps_fetch_btn",
+        )
+
+        if fetch_btn:
+            if start_date > end_date:
+                st.error("⚠️ Tanggal mulai tidak boleh lebih besar daripada tanggal akhir.")
+            else:
+                fetch_progress = st.progress(0.0, text="Menghubungi Google Play Store...")
+
+                def _update_fetch_progress(val):
+                    pct = int(min(max(val, 0.0), 1.0) * 100)
+                    fetch_progress.progress(
+                        min(max(val, 0.0), 1.0),
+                        text=f"Mengambil ulasan Play Store... ({pct}%)",
+                    )
+
+                try:
+                    scraped_df = scrape_playstore_reviews(
+                        start_date=start_date,
+                        end_date=end_date,
+                        max_reviews=max_reviews,
+                        progress_callback=_update_fetch_progress,
+                    )
+                except (ValueError, RuntimeError) as exc:
+                    fetch_progress.empty()
+                    st.error(f"⚠️ {exc}")
+                else:
+                    fetch_progress.empty()
+                    st.session_state["ps_scraped_df"] = scraped_df
+                    st.session_state["ps_scraped_range"] = (str(start_date), str(end_date))
+                    st.session_state.pop("ps_result_df", None)
+
+        if "ps_scraped_df" in st.session_state:
+            scraped_df = st.session_state["ps_scraped_df"]
+            r_start, r_end = st.session_state.get(
+                "ps_scraped_range", (str(start_date), str(end_date))
+            )
+
+            if scraped_df.empty:
+                st.info(
+                    f"Tidak ada ulasan ditemukan pada rentang tanggal **{r_start}** sampai **{r_end}**. Coba perluas rentang tanggal."
+                )
+            else:
+                st.caption(
+                    f"Berhasil mengambil **{len(scraped_df):,}** ulasan pada rentang **{r_start}** s/d **{r_end}**."
+                )
+                with st.expander("👀 Preview Data Ulasan Play Store", expanded=True):
+                    st.dataframe(scraped_df, use_container_width=True, hide_index=True)
+
+                act_col1, act_col2 = st.columns(2)
+                analyze_ps_btn = act_col1.button(
+                    "🚀 Analisis Data Play Store",
+                    type="primary",
+                    use_container_width=True,
+                    key="ps_analyze_btn",
+                )
+                raw_csv_bytes = scraped_df.to_csv(index=False).encode("utf-8-sig")
+                act_col2.download_button(
+                    label="⬇️ Download Data Mentah (CSV)",
+                    data=raw_csv_bytes,
+                    file_name=f"ulasan_playstore_{r_start}_{r_end}.csv",
+                    mime="text/csv",
+                    use_container_width=True,
+                    key="ps_download_raw",
+                )
+
+                if analyze_ps_btn:
+                    ps_progress = st.progress(0.0, text="Memulai analisis ulasan Play Store...")
+
+                    def _update_ps_analysis(val):
+                        pct = int(min(max(val, 0.0), 1.0) * 100)
+                        ps_progress.progress(
+                            min(max(val, 0.0), 1.0),
+                            text=f"Menganalisis ulasan... ({pct}%)",
                         )
-                        with st.expander("📈 Distribusi Topik Cluster dari File", expanded=True):
-                            st.dataframe(dist_df, use_container_width=True, hide_index=True)
 
-                    st.markdown("#### 📄 Hasil Lengkap per Ulasan")
-                    st.dataframe(result_df, use_container_width=True, hide_index=True)
+                    ps_result_df = analyze_reviews_batch(
+                        scraped_df["ulasan"].tolist(),
+                        tokenizer,
+                        classifier,
+                        le,
+                        device,
+                        bertopic_models,
+                        embedding_model,
+                        progress_callback=_update_ps_analysis,
+                    )
+                    ps_result_df.insert(0, "Tanggal", scraped_df["tanggal"].values)
+                    ps_result_df.insert(1, "Rating", scraped_df["score"].values)
+                    ps_progress.empty()
+                    st.session_state["ps_result_df"] = ps_result_df
+                    st.session_state["ps_result_range"] = (r_start, r_end)
 
-                    csv_bytes = result_df.to_csv(index=False).encode("utf-8-sig")
-                    out_stem = Path(uploaded_file.name).stem
-                    st.download_button(
-                        label="⬇️ Download Hasil Analisis (CSV)",
-                        data=csv_bytes,
-                        file_name=f"hasil_analisis_{out_stem}.csv",
-                        mime="text/csv",
-                        use_container_width=True,
+                if "ps_result_df" in st.session_state:
+                    res_start, res_end = st.session_state.get(
+                        "ps_result_range", (r_start, r_end)
+                    )
+                    _render_batch_analysis_results(
+                        st.session_state["ps_result_df"],
+                        f"playstore_{res_start}_{res_end}",
+                        "ps_batch",
                     )
 
     # Tampilkan daftar seluruh cluster yang sudah diberi nama di halaman web

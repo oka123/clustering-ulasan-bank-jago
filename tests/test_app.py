@@ -297,6 +297,80 @@ class TestApp(unittest.TestCase):
         self.assertEqual(result_df.iloc[2]["Cluster"], "Outlier")
         self.assertEqual(progress_values[-1], 1.0)
 
+    def test_scrape_playstore_reviews_date_filter_and_early_stop(self):
+        """Positive case: pagination difilter tanggal dan berhenti saat melewati start_date."""
+        from datetime import date, datetime
+
+        page1 = [
+            {
+                "at": datetime(2026, 11, 25, 10, 0),
+                "userName": "User Baru",
+                "score": 5,
+                "content": "Melewati batas akhir",
+                "thumbsUpCount": 1,
+            },
+            {
+                "at": datetime(2026, 11, 20, 9, 30),
+                "userName": "User Valid",
+                "score": 4,
+                "content": "Transfer cepat dan mudah",
+                "thumbsUpCount": 3,
+            },
+        ]
+        page2 = [
+            {
+                "at": datetime(2026, 11, 10, 8, 0),
+                "userName": "User Lama",
+                "score": 2,
+                "content": "Sudah di luar rentang mulai",
+                "thumbsUpCount": 0,
+            }
+        ]
+
+        with patch(
+            "google_play_scraper.reviews",
+            side_effect=[(page1, "tok_2"), (page2, "tok_3")],
+        ) as mock_reviews:
+            df = app.scrape_playstore_reviews(
+                start_date=date(2026, 11, 15),
+                end_date=date(2026, 11, 22),
+                max_reviews=50,
+            )
+
+        self.assertEqual(mock_reviews.call_count, 2)
+        self.assertEqual(len(df), 1)
+        self.assertEqual(df.iloc[0]["userName"], "User Valid")
+        self.assertEqual(df.iloc[0]["ulasan"], "Transfer cepat dan mudah")
+        self.assertEqual(df.iloc[0]["score"], 4)
+
+    def test_scrape_playstore_reviews_negative_cases(self):
+        """Negative case: tanggal terbalik, respons kosong, dan error koneksi."""
+        from datetime import date
+
+        with self.assertRaises(ValueError):
+            app.scrape_playstore_reviews(
+                start_date=date(2026, 11, 25),
+                end_date=date(2026, 11, 20),
+            )
+
+        with patch("google_play_scraper.reviews", return_value=([], None)):
+            empty_df = app.scrape_playstore_reviews(
+                start_date=date(2026, 11, 1),
+                end_date=date(2026, 11, 25),
+            )
+        self.assertTrue(empty_df.empty)
+        self.assertEqual(
+            list(empty_df.columns),
+            ["tanggal", "userName", "score", "ulasan", "thumbsUpCount"],
+        )
+
+        with patch("google_play_scraper.reviews", side_effect=OSError("timeout")):
+            with self.assertRaises(RuntimeError):
+                app.scrape_playstore_reviews(
+                    start_date=date(2026, 11, 1),
+                    end_date=date(2026, 11, 25),
+                )
+
 
 if __name__ == "__main__":
     unittest.main()
