@@ -11,3 +11,4 @@ tqdm>=4.65.0
 hdbscan>=0.8.33
 umap-learn>=0.5.3
 google-play-scraper>=1.2.7
+plotly>=5.18.0
