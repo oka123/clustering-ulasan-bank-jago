@@ -25,6 +25,22 @@ DASHBOARD_COLUMNS = [
     "Keyakinan (%)", "Cluster", "Nama Topik",
 ]
 
+# Contoh ulasan cepat untuk pengujian di tab Analisis Ulasan
+SAMPLE_REVIEWS = [
+    (
+        "Contoh Positif: Transfer",
+        "Aplikasinya sangat membantu, transfer gratis ke mana saja dan cepat masuk.",
+    ),
+    (
+        "Contoh Positif: QRIS",
+        "Fitur QRIS nya mantap, bayar di kasir tinggal scan langsung beres.",
+    ),
+    (
+        "Contoh Negatif: Login",
+        "Susah banget login di hp baru, verifikasi email tidak masuk padahal data sudah benar.",
+    ),
+]
+
 # Pemetaan nama cluster BERTopic berdasarkan kata kunci dominan di tiap topik
 TOPIC_LABELS = {
     "Negatif": {

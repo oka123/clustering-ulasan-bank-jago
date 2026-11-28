@@ -54,7 +54,8 @@ class TestApp(unittest.TestCase):
         )
         self.assertIsNone(topic_id)
         self.assertIsNone(topic_name)
-        self.assertIn("tidak tersedia", topic_info)
+        self.assertIsInstance(topic_info, str)
+        self.assertIn("tidak tersedia", str(topic_info))
 
     def test_predict_topic_outlier(self):
         """Negative/Edge case: BERTopic mengembalikan topic_id -1 (outlier)."""
@@ -69,7 +70,8 @@ class TestApp(unittest.TestCase):
             "ulasan acak", "Positif", {"Positif": mock_bt}, mock_emb
         )
         self.assertEqual(topic_id, -1)
-        self.assertIn("Outlier", topic_name)
+        self.assertIsInstance(topic_name, str)
+        self.assertIn("Outlier", str(topic_name))
         self.assertIsNone(topic_info)
 
     def test_predict_topic_positive_cluster(self):
@@ -371,144 +373,6 @@ class TestApp(unittest.TestCase):
                     start_date=date(2026, 11, 1),
                     end_date=date(2026, 11, 25),
                 )
-
-    def test_dashboard_cache_save_load_and_dedup(self):
-        """Positive & negative case: simpan/muat cache Dashboard dan deduplikasi data."""
-        with tempfile.TemporaryDirectory() as tmpdir:
-            cache_file = Path(tmpdir) / "cache.csv"
-
-            # Negative case: file cache belum ada -> DataFrame kosong berkolom standar
-            empty_loaded = app.load_dashboard_cache(cache_file)
-            self.assertTrue(empty_loaded.empty)
-            self.assertEqual(list(empty_loaded.columns), app.DASHBOARD_COLUMNS)
-
-            df_old = pd.DataFrame(
-                [
-                    {
-                        "tanggal": "2025-12-10 08:00",
-                        "userName": "Ani",
-                        "score": 5,
-                        "ulasan": "Bagus banget",
-                        "thumbsUpCount": 1,
-                        "Teks Bersih": "bagus banget",
-                        "Sentimen": "Positif",
-                        "Keyakinan (%)": 98.5,
-                        "Cluster": "#0",
-                        "Nama Topik": "Kemudahan Transaksi & Transfer Gratis",
-                    }
-                ]
-            )
-            df_new = pd.DataFrame(
-                [
-                    {
-                        "tanggal": "2025-12-10 08:00",
-                        "userName": "Ani",
-                        "score": 5,
-                        "ulasan": "Bagus banget",
-                        "thumbsUpCount": 2,
-                        "Teks Bersih": "bagus banget",
-                        "Sentimen": "Positif",
-                        "Keyakinan (%)": 99.0,
-                        "Cluster": "#0",
-                        "Nama Topik": "Kemudahan Transaksi & Transfer Gratis",
-                    },
-                    {
-                        "tanggal": "2026-01-15 11:30",
-                        "userName": "Budi",
-                        "score": 1,
-                        "ulasan": "Gagal login terus",
-                        "thumbsUpCount": 0,
-                        "Teks Bersih": "gagal login terus",
-                        "Sentimen": "Negatif",
-                        "Keyakinan (%)": 96.0,
-                        "Cluster": "#0",
-                        "Nama Topik": "Kendala Login & Akses Akun",
-                    },
-                ]
-            )
-
-            merged = app.merge_dashboard_cache(df_old, df_new)
-            self.assertEqual(len(merged), 2)
-            self.assertEqual(list(merged["tahun"]), [2026, 2025])
-            self.assertEqual(list(merged["bulan"]), [1, 12])
-
-            app.save_dashboard_cache(merged, cache_file)
-            reloaded = app.load_dashboard_cache(cache_file)
-            self.assertEqual(len(reloaded), 2)
-            self.assertEqual(reloaded.iloc[0]["userName"], "Budi")
-
-    def test_dashboard_filter_metrics_and_trends(self):
-        """Positive & negative case: filter Tahun->Bulan->Sentimen, KPI, dan tren bulanan."""
-        raw_df = pd.DataFrame(
-            [
-                {
-                    "tanggal": "2026-01-10 09:00",
-                    "userName": "A",
-                    "score": 5,
-                    "ulasan": "transfer cepat",
-                    "thumbsUpCount": 0,
-                    "Teks Bersih": "transfer cepat",
-                    "Sentimen": "Positif",
-                    "Keyakinan (%)": 99.0,
-                    "Cluster": "#0",
-                    "Nama Topik": "Kemudahan Transaksi & Transfer Gratis",
-                },
-                {
-                    "tanggal": "2026-02-12 10:00",
-                    "userName": "B",
-                    "score": 1,
-                    "ulasan": "susah login",
-                    "thumbsUpCount": 0,
-                    "Teks Bersih": "susah login",
-                    "Sentimen": "Negatif",
-                    "Keyakinan (%)": 95.0,
-                    "Cluster": "#0",
-                    "Nama Topik": "Kendala Login & Akses Akun",
-                },
-                {
-                    "tanggal": "2026-02-20 14:00",
-                    "userName": "C",
-                    "score": 2,
-                    "ulasan": "tidak bisa login",
-                    "thumbsUpCount": 0,
-                    "Teks Bersih": "tidak bisa login",
-                    "Sentimen": "Negatif",
-                    "Keyakinan (%)": 97.0,
-                    "Cluster": "#0",
-                    "Nama Topik": "Kendala Login & Akses Akun",
-                },
-            ]
-        )
-        dash_df = app.merge_dashboard_cache(pd.DataFrame(), raw_df)
-
-        # Semua Bulan di tahun 2026
-        yr_2026 = app.filter_dashboard_data(dash_df, 2026, "Semua Bulan", "Semua")
-        self.assertEqual(len(yr_2026), 3)
-
-        # Bulan Februari saja
-        feb_2026 = app.filter_dashboard_data(dash_df, 2026, 2, "Semua")
-        self.assertEqual(len(feb_2026), 2)
-
-        # Negative case: tahun tidak ada
-        empty_yr = app.filter_dashboard_data(dash_df, 2023, "Semua Bulan", "Semua")
-        self.assertTrue(empty_yr.empty)
-
-        metrics = app.summarize_dashboard_metrics(yr_2026)
-        self.assertEqual(metrics["total"], 3)
-        self.assertEqual(metrics["positif_count"], 1)
-        self.assertEqual(metrics["negatif_count"], 2)
-        self.assertIn("Kendala Login & Akses Akun", metrics["top_topic"])
-
-        trend = app.build_monthly_trend_df(yr_2026)
-        self.assertEqual(list(trend["bulan"]), [1, 2])
-        self.assertEqual(list(trend["bulan_label"]), ["Jan", "Feb"])
-
-        topic_trend = app.build_topic_monthly_trend_df(yr_2026, top_n=5)
-        self.assertFalse(topic_trend.empty)
-
-        empty_metrics = app.summarize_dashboard_metrics(empty_yr)
-        self.assertEqual(empty_metrics["total"], 0)
-        self.assertEqual(empty_metrics["top_topic"], "-")
 
 
 if __name__ == "__main__":

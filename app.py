@@ -35,6 +35,7 @@ from src.config import (  # noqa: E402, F401
     MONTH_NAMES_ID,
     MONTH_SHORT_ID,
     PLAYSTORE_APP_ID,
+    SAMPLE_REVIEWS,
     SLANG_DICT,
     TOPIC_LABELS,
 )
@@ -53,10 +54,12 @@ from src.models import (  # noqa: E402, F401
     resolve_topic_name,
 )
 from src.playstore_dashboard import (  # noqa: E402, F401
+    build_batch_distribution_df,
     build_dashboard_records_from_playstore,
     build_monthly_trend_df,
     build_topic_monthly_trend_df,
     build_topic_ranking_df,
+    filter_batch_results,
     filter_dashboard_data,
     load_dashboard_cache,
     merge_dashboard_cache,
@@ -70,10 +73,11 @@ from src.preprocessing import (  # noqa: E402, F401
     load_uploaded_table,
 )
 from src.ui_sections import (  # noqa: E402
+    apply_custom_styles,
     render_dashboard_tab,
     render_playstore_tab,
     render_text_tab,
-    render_topic_reference_section,
+    render_topic_reference_tab,
     render_upload_tab,
 )
 
@@ -82,51 +86,67 @@ def main() -> None:
     """Entry point utama aplikasi Streamlit."""
     st.set_page_config(
         page_title="Analisis Ulasan Bank Jago",
-        page_icon="🏦",
         layout="wide",
     )
+    apply_custom_styles()
 
     st.markdown(
         """
-        <div style="text-align: center; padding: 0.5rem 0 1rem 0;">
-            <h2 style="margin-bottom: 0.2rem;">🏦 Analisis Ulasan Bank Jago</h2>
-            <p style="font-size: 0.95rem; color: #666; margin-top: 0;">
-              Clustering Topik (BERTopic)
+        <header class="hero-header">
+            <h1 class="hero-title">Analisis Ulasan Bank Jago</h1>
+            <p class="hero-subtitle">
+                Klasifikasi sentimen IndoBERT dan clustering topik otomatis menggunakan BERTopic.
             </p>
-        </div>
+        </header>
         """,
         unsafe_allow_html=True,
     )
 
-    with st.sidebar:
-        st.markdown("### ℹ️ Info Model")
-        st.caption(
-            "• **Sentimen**: IndoBERT (`indobert-base-p1`)\n"
-            "• **Topik**: BERTopic (`paraphrase-multilingual-MiniLM-L12-v2`)"
-        )
-        st.markdown("---")
-        st.caption("Kelompok 4 - Kelas A")
-
     model_exists = MODEL_DIR.exists() and (MODEL_DIR / "config.json").exists()
     if not model_exists:
-        st.error(f"⚠️ Model IndoBERT belum ditemukan di `{MODEL_DIR}/`!")
+        st.error(
+            f"Model IndoBERT tidak ditemukan di folder `{MODEL_DIR}/`. "
+            "Pastikan file `config.json` dan bobot model sudah tersedia."
+        )
         st.stop()
 
-    tokenizer, classifier, le, device = load_classifier()
     bertopic_available = BERTOPIC_NEG_DIR.exists() or BERTOPIC_POS_DIR.exists()
-    bertopic_models = {}
-    embedding_model = None
 
-    if bertopic_available:
-        embedding_model = load_sentence_embedding_model()
-        bertopic_models = load_bertopic_models(embedding_model)
+    with st.sidebar:
+        st.markdown("<h2 class='section-title'>Informasi Model</h2>", unsafe_allow_html=True)
+        st.markdown(
+            "**Klasifikasi Sentimen**  \n"
+            "`agufsamudra/indo-sentiment-analysis` (IndoBERT)"
+        )
+        st.markdown(
+            "**Clustering Topik**  \n"
+            "`BERTopic` dengan embedding `paraphrase-multilingual-MiniLM-L12-v2`"
+        )
+        st.markdown("---")
+        bertopic_status = (
+            "Tersedia (Negatif & Positif)"
+            if (BERTOPIC_NEG_DIR.exists() and BERTOPIC_POS_DIR.exists())
+            else ("Parsial" if bertopic_available else "Tidak tersedia")
+        )
+        st.caption(f"Status BERTopic: {bertopic_status}")
+        st.caption("Tugas Akhir | Kelompok 4 - Kelas A")
 
-    tab_dashboard, tab_text, tab_file, tab_playstore = st.tabs(
+    with st.spinner("Memuat model IndoBERT dan BERTopic..."):
+        tokenizer, classifier, le, device = load_classifier()
+        bertopic_models = {}
+        embedding_model = None
+
+        if bertopic_available:
+            embedding_model = load_sentence_embedding_model()
+            bertopic_models = load_bertopic_models(embedding_model)
+
+    tab_dashboard, tab_text, tab_file, tab_playstore, tab_topics = st.tabs(
         [
-            "📊 Dashboard",
-            "✍️ Input Teks",
-            "📁 Upload CSV / Excel",
-            "📱 Ambil Data Play Store",
+            "Dashboard",
+            "Analisis Ulasan",
+            "Upload CSV / Excel",
+            "Ambil Data Play Store",
+            "Referensi Topik",
         ]
     )
 
@@ -156,14 +176,15 @@ def main() -> None:
             tokenizer, classifier, le, device, bertopic_models, embedding_model
         )
 
-    if bertopic_available and bertopic_models:
-        render_topic_reference_section(bertopic_models)
+    with tab_topics:
+        render_topic_reference_tab(bertopic_available, bertopic_models)
 
-    st.markdown("---")
     st.markdown(
-        "<div style='text-align: center; color: #888; font-size: 0.8rem;'>"
-        "Tugas Akhir — Analisis Ulasan Bank Jago | Kelompok 4"
-        "</div>",
+        """
+        <footer class="app-footer">
+            Tugas Akhir | Analisis Ulasan Bank Jago | Kelompok 4A
+        </footer>
+        """,
         unsafe_allow_html=True,
     )
 

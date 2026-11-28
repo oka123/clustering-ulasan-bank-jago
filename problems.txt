@@ -1,0 +1,1662 @@
+[{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/app.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportGeneralTypeIssues",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportGeneralTypeIssues"
+		}
+	},
+	"severity": 8,
+	"message": "\"NoReturn\" is not iterable",
+	"source": "Pyright",
+	"startLineNumber": 135,
+	"startColumn": 45,
+	"endLineNumber": 135,
+	"endColumn": 62,
+	"origin": "extHost1"
+}]
+[{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportArgumentType",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportArgumentType"
+		}
+	},
+	"severity": 8,
+	"message": "Argument of type \"_ContinuationToken | None\" cannot be assigned to parameter \"continuation_token\" of type \"_ContinuationToken\" in function \"reviews\"\n  Type \"_ContinuationToken | None\" is not assignable to type \"_ContinuationToken\"\n    \"None\" is not assignable to \"_ContinuationToken\"",
+	"source": "Pyright",
+	"startLineNumber": 49,
+	"startColumn": 36,
+	"endLineNumber": 49,
+	"endColumn": 54,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"float\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 124,
+	"startColumn": 67,
+	"endLineNumber": 124,
+	"endColumn": 73,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"Number\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 124,
+	"startColumn": 67,
+	"endLineNumber": 124,
+	"endColumn": 73,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"number[Unknown]\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 124,
+	"startColumn": 67,
+	"endLineNumber": 124,
+	"endColumn": 73,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"int\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 124,
+	"startColumn": 67,
+	"endLineNumber": 124,
+	"endColumn": 73,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"NAType\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 124,
+	"startColumn": 67,
+	"endLineNumber": 124,
+	"endColumn": 73,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"NaTType\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 124,
+	"startColumn": 67,
+	"endLineNumber": 124,
+	"endColumn": 73,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"Timestamp\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 124,
+	"startColumn": 67,
+	"endLineNumber": 124,
+	"endColumn": 73,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"Timedelta\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 124,
+	"startColumn": 67,
+	"endLineNumber": 124,
+	"endColumn": 73,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"ndarray[Any, Unknown]\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 124,
+	"startColumn": 67,
+	"endLineNumber": 124,
+	"endColumn": 73,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"ndarray[Any, dtype[Any]]\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 124,
+	"startColumn": 67,
+	"endLineNumber": 124,
+	"endColumn": 73,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"ndarray[Any, dtype[signedinteger[_64Bit]]]\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 124,
+	"startColumn": 67,
+	"endLineNumber": 124,
+	"endColumn": 73,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"ndarray[Unknown, Unknown]\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 124,
+	"startColumn": 67,
+	"endLineNumber": 124,
+	"endColumn": 73,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"float\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 126,
+	"startColumn": 63,
+	"endLineNumber": 126,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"Number\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 126,
+	"startColumn": 63,
+	"endLineNumber": 126,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"number[Unknown]\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 126,
+	"startColumn": 63,
+	"endLineNumber": 126,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"int\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 126,
+	"startColumn": 63,
+	"endLineNumber": 126,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"NAType\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 126,
+	"startColumn": 63,
+	"endLineNumber": 126,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"NaTType\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 126,
+	"startColumn": 63,
+	"endLineNumber": 126,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"Timestamp\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 126,
+	"startColumn": 63,
+	"endLineNumber": 126,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"Timedelta\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 126,
+	"startColumn": 63,
+	"endLineNumber": 126,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"ndarray[Any, Unknown]\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 126,
+	"startColumn": 63,
+	"endLineNumber": 126,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"ndarray[Any, dtype[Any]]\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 126,
+	"startColumn": 63,
+	"endLineNumber": 126,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"ndarray[Any, dtype[signedinteger[_64Bit]]]\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 126,
+	"startColumn": 63,
+	"endLineNumber": 126,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"ndarray[Unknown, Unknown]\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 126,
+	"startColumn": 63,
+	"endLineNumber": 126,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"float\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 129,
+	"startColumn": 63,
+	"endLineNumber": 129,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"Number\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 129,
+	"startColumn": 63,
+	"endLineNumber": 129,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"number[Unknown]\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 129,
+	"startColumn": 63,
+	"endLineNumber": 129,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"int\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 129,
+	"startColumn": 63,
+	"endLineNumber": 129,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"NAType\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 129,
+	"startColumn": 63,
+	"endLineNumber": 129,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"NaTType\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 129,
+	"startColumn": 63,
+	"endLineNumber": 129,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"Timestamp\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 129,
+	"startColumn": 63,
+	"endLineNumber": 129,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"Timedelta\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 129,
+	"startColumn": 63,
+	"endLineNumber": 129,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"ndarray[Any, Unknown]\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 129,
+	"startColumn": 63,
+	"endLineNumber": 129,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"ndarray[Any, dtype[Any]]\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 129,
+	"startColumn": 63,
+	"endLineNumber": 129,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"ndarray[Any, dtype[signedinteger[_64Bit]]]\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 129,
+	"startColumn": 63,
+	"endLineNumber": 129,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"fillna\" for class \"ndarray[Unknown, Unknown]\"\n  Attribute \"fillna\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 129,
+	"startColumn": 63,
+	"endLineNumber": 129,
+	"endColumn": 69,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportReturnType",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportReturnType"
+		}
+	},
+	"severity": 8,
+	"message": "Type \"DataFrame | Series | Any | Unknown\" is not assignable to return type \"DataFrame\"\n  Type \"DataFrame | Series | Any | Unknown\" is not assignable to type \"DataFrame\"\n    \"Series\" is not assignable to \"DataFrame\"",
+	"source": "Pyright",
+	"startLineNumber": 131,
+	"startColumn": 12,
+	"endLineNumber": 131,
+	"endColumn": 58,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"reset_index\" for class \"ndarray[Any, Unknown]\"\n  Attribute \"reset_index\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 131,
+	"startColumn": 36,
+	"endLineNumber": 131,
+	"endColumn": 47,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"reset_index\" for class \"NDArray[Unknown]\"\n  Attribute \"reset_index\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 131,
+	"startColumn": 36,
+	"endLineNumber": 131,
+	"endColumn": 47,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportReturnType",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportReturnType"
+		}
+	},
+	"severity": 8,
+	"message": "Type \"DataFrame | Series | Any | Unknown\" is not assignable to return type \"DataFrame\"\n  Type \"DataFrame | Series | Any | Unknown\" is not assignable to type \"DataFrame\"\n    \"Series\" is not assignable to \"DataFrame\"",
+	"source": "Pyright",
+	"startLineNumber": 211,
+	"startColumn": 12,
+	"endLineNumber": 211,
+	"endColumn": 43,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"reset_index\" for class \"ndarray[Any, Unknown]\"\n  Attribute \"reset_index\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 211,
+	"startColumn": 21,
+	"endLineNumber": 211,
+	"endColumn": 32,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"reset_index\" for class \"NDArray[Unknown]\"\n  Attribute \"reset_index\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 211,
+	"startColumn": 21,
+	"endLineNumber": 211,
+	"endColumn": 32,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportArgumentType",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportArgumentType"
+		}
+	},
+	"severity": 8,
+	"message": "Argument of type \"Series | Any | Unknown\" cannot be assigned to parameter \"x\" of type \"ConvertibleToFloat\" in function \"__new__\"\n  Type \"Series | Any | Unknown\" is not assignable to type \"ConvertibleToFloat\"\n    Type \"Series\" is not assignable to type \"ConvertibleToFloat\"\n      \"Series\" is not assignable to \"str\"\n      \"Series\" is incompatible with protocol \"Buffer\"\n        \"__buffer__\" is not present\n      \"Series\" is incompatible with protocol \"SupportsFloat\"\n        \"__float__\" is not present\n      \"Series\" is incompatible with protocol \"SupportsIndex\"\n  ...",
+	"source": "Pyright",
+	"startLineNumber": 230,
+	"startColumn": 24,
+	"endLineNumber": 230,
+	"endColumn": 42,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportArgumentType",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportArgumentType"
+		}
+	},
+	"severity": 8,
+	"message": "Argument of type \"Series | Any | Unknown\" cannot be assigned to parameter \"x\" of type \"ConvertibleToFloat\" in function \"__new__\"\n  Type \"Series | Any | Unknown\" is not assignable to type \"ConvertibleToFloat\"\n    Type \"Series\" is not assignable to type \"ConvertibleToFloat\"\n      \"Series\" is not assignable to \"str\"\n      \"Series\" is incompatible with protocol \"Buffer\"\n        \"__buffer__\" is not present\n      \"Series\" is incompatible with protocol \"SupportsFloat\"\n        \"__float__\" is not present\n      \"Series\" is incompatible with protocol \"SupportsIndex\"",
+	"source": "Pyright",
+	"startLineNumber": 230,
+	"startColumn": 24,
+	"endLineNumber": 230,
+	"endColumn": 42,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportCallIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportCallIssue"
+		}
+	},
+	"severity": 8,
+	"message": "No overloads for \"reset_index\" match the provided arguments\n  Argument types: (Literal['Jumlah Ulasan'])",
+	"source": "Pyright",
+	"startLineNumber": 240,
+	"startColumn": 13,
+	"endLineNumber": 242,
+	"endColumn": 47,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportCallIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportCallIssue"
+		}
+	},
+	"severity": 8,
+	"message": "No overloads for \"reset_index\" match the provided arguments\n  Argument types: (Literal['Jumlah Ulasan'])",
+	"source": "Pyright",
+	"startLineNumber": 273,
+	"startColumn": 9,
+	"endLineNumber": 275,
+	"endColumn": 43,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportArgumentType",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportArgumentType"
+		}
+	},
+	"severity": 8,
+	"message": "Argument of type \"dict[int, str]\" cannot be assigned to parameter \"func\" of type \"PythonFuncType\" in function \"map\"\n  Type \"dict[int, str]\" is not assignable to type \"PythonFuncType\"",
+	"source": "Pyright",
+	"startLineNumber": 278,
+	"startColumn": 43,
+	"endLineNumber": 278,
+	"endColumn": 57,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportRedeclaration",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportRedeclaration"
+		}
+	},
+	"severity": 8,
+	"message": "Function declaration \"build_batch_distribution_df\" is obscured by a declaration of the same name",
+	"source": "Pyright",
+	"startLineNumber": 282,
+	"startColumn": 5,
+	"endLineNumber": 282,
+	"endColumn": 32,
+	"relatedInformation": [
+		{
+			"startLineNumber": 369,
+			"startColumn": 5,
+			"endLineNumber": 369,
+			"endColumn": 32,
+			"message": "See function declaration",
+			"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py"
+		}
+	],
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportCallIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportCallIssue"
+		}
+	},
+	"severity": 8,
+	"message": "No overloads for \"reset_index\" match the provided arguments\n  Argument types: (Literal['Jumlah Ulasan'])",
+	"source": "Pyright",
+	"startLineNumber": 293,
+	"startColumn": 9,
+	"endLineNumber": 295,
+	"endColumn": 43,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportRedeclaration",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportRedeclaration"
+		}
+	},
+	"severity": 8,
+	"message": "Function declaration \"filter_batch_results\" is obscured by a declaration of the same name",
+	"source": "Pyright",
+	"startLineNumber": 303,
+	"startColumn": 5,
+	"endLineNumber": 303,
+	"endColumn": 25,
+	"relatedInformation": [
+		{
+			"startLineNumber": 390,
+			"startColumn": 5,
+			"endLineNumber": 390,
+			"endColumn": 25,
+			"message": "See function declaration",
+			"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py"
+		}
+	],
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportReturnType",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportReturnType"
+		}
+	},
+	"severity": 8,
+	"message": "Type \"DataFrame | Series | Any | Unknown\" is not assignable to return type \"DataFrame\"\n  Type \"DataFrame | Series | Any | Unknown\" is not assignable to type \"DataFrame\"\n    \"Series\" is not assignable to \"DataFrame\"",
+	"source": "Pyright",
+	"startLineNumber": 317,
+	"startColumn": 12,
+	"endLineNumber": 317,
+	"endColumn": 43,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"reset_index\" for class \"ndarray[Any, Unknown]\"\n  Attribute \"reset_index\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 317,
+	"startColumn": 21,
+	"endLineNumber": 317,
+	"endColumn": 32,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"reset_index\" for class \"NDArray[Unknown]\"\n  Attribute \"reset_index\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 317,
+	"startColumn": 21,
+	"endLineNumber": 317,
+	"endColumn": 32,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportCallIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportCallIssue"
+		}
+	},
+	"severity": 8,
+	"message": "No overloads for \"reset_index\" match the provided arguments\n  Argument types: (Literal['Jumlah Ulasan'])",
+	"source": "Pyright",
+	"startLineNumber": 331,
+	"startColumn": 9,
+	"endLineNumber": 333,
+	"endColumn": 43,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"value_counts\" for class \"ndarray[Any, Unknown]\"\n  Attribute \"value_counts\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 356,
+	"startColumn": 39,
+	"endLineNumber": 356,
+	"endColumn": 51,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"value_counts\" for class \"NDArray[Unknown]\"\n  Attribute \"value_counts\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 356,
+	"startColumn": 39,
+	"endLineNumber": 356,
+	"endColumn": 51,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"isin\" for class \"ndarray[Any, Unknown]\"\n  Attribute \"isin\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 357,
+	"startColumn": 43,
+	"endLineNumber": 357,
+	"endColumn": 47,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"isin\" for class \"NDArray[Unknown]\"\n  Attribute \"isin\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 357,
+	"startColumn": 43,
+	"endLineNumber": 357,
+	"endColumn": 47,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportCallIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportCallIssue"
+		}
+	},
+	"severity": 8,
+	"message": "No overloads for \"reset_index\" match the provided arguments\n  Argument types: (Literal['Jumlah Ulasan'])",
+	"source": "Pyright",
+	"startLineNumber": 360,
+	"startColumn": 9,
+	"endLineNumber": 362,
+	"endColumn": 43,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"groupby\" for class \"ndarray[Any, Unknown]\"\n  Attribute \"groupby\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 360,
+	"startColumn": 18,
+	"endLineNumber": 360,
+	"endColumn": 25,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"groupby\" for class \"NDArray[Unknown]\"\n  Attribute \"groupby\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 360,
+	"startColumn": 18,
+	"endLineNumber": 360,
+	"endColumn": 25,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportArgumentType",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportArgumentType"
+		}
+	},
+	"severity": 8,
+	"message": "Argument of type \"dict[int, str]\" cannot be assigned to parameter \"func\" of type \"PythonFuncType\" in function \"map\"\n  Type \"dict[int, str]\" is not assignable to type \"PythonFuncType\"",
+	"source": "Pyright",
+	"startLineNumber": 365,
+	"startColumn": 43,
+	"endLineNumber": 365,
+	"endColumn": 57,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportCallIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportCallIssue"
+		}
+	},
+	"severity": 8,
+	"message": "No overloads for \"rename\" match the provided arguments\n  Argument types: (dict[str, str])",
+	"source": "Pyright",
+	"startLineNumber": 380,
+	"startColumn": 9,
+	"endLineNumber": 382,
+	"endColumn": 51,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportReturnType",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportReturnType"
+		}
+	},
+	"severity": 8,
+	"message": "Type \"Series | Unknown | DataFrame\" is not assignable to return type \"DataFrame\"\n  Type \"Series | Unknown | DataFrame\" is not assignable to type \"DataFrame\"\n    \"Series\" is not assignable to \"DataFrame\"",
+	"source": "Pyright",
+	"startLineNumber": 387,
+	"startColumn": 12,
+	"endLineNumber": 387,
+	"endColumn": 28,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportReturnType",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportReturnType"
+		}
+	},
+	"severity": 8,
+	"message": "Type \"DataFrame | Series | Any | Unknown\" is not assignable to return type \"DataFrame\"\n  Type \"DataFrame | Series | Any | Unknown\" is not assignable to type \"DataFrame\"\n    \"Series\" is not assignable to \"DataFrame\"",
+	"source": "Pyright",
+	"startLineNumber": 404,
+	"startColumn": 12,
+	"endLineNumber": 404,
+	"endColumn": 43,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"reset_index\" for class \"ndarray[Any, Unknown]\"\n  Attribute \"reset_index\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 404,
+	"startColumn": 21,
+	"endLineNumber": 404,
+	"endColumn": 32,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/playstore_dashboard.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"reset_index\" for class \"NDArray[Unknown]\"\n  Attribute \"reset_index\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 404,
+	"startColumn": 21,
+	"endLineNumber": 404,
+	"endColumn": 32,
+	"origin": "extHost1"
+}]
+[{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/ui_sections.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportCallIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportCallIssue"
+		}
+	},
+	"severity": 8,
+	"message": "No overloads for \"reset_index\" match the provided arguments\n  Argument types: (Literal['Jumlah Ulasan'])",
+	"source": "Pyright",
+	"startLineNumber": 511,
+	"startColumn": 25,
+	"endLineNumber": 515,
+	"endColumn": 14,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/ui_sections.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"unique\" for class \"ndarray[Any, Unknown]\"\n  Attribute \"unique\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 677,
+	"startColumn": 48,
+	"endLineNumber": 677,
+	"endColumn": 54,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/ui_sections.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"unique\" for class \"NDArray[Unknown]\"\n  Attribute \"unique\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 677,
+	"startColumn": 48,
+	"endLineNumber": 677,
+	"endColumn": 54,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/ui_sections.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"reset_index\" for class \"ndarray[Any, Unknown]\"\n  Attribute \"reset_index\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 781,
+	"startColumn": 32,
+	"endLineNumber": 781,
+	"endColumn": 43,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/ui_sections.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"reset_index\" for class \"NDArray[Unknown]\"\n  Attribute \"reset_index\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 781,
+	"startColumn": 32,
+	"endLineNumber": 781,
+	"endColumn": 43,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/ui_sections.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"to_csv\" for class \"ndarray[Any, Unknown]\"\n  Attribute \"to_csv\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 786,
+	"startColumn": 39,
+	"endLineNumber": 786,
+	"endColumn": 45,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/src/ui_sections.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportAttributeAccessIssue",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportAttributeAccessIssue"
+		}
+	},
+	"severity": 8,
+	"message": "Cannot access attribute \"to_csv\" for class \"NDArray[Unknown]\"\n  Attribute \"to_csv\" is unknown",
+	"source": "Pyright",
+	"startLineNumber": 786,
+	"startColumn": 39,
+	"endLineNumber": 786,
+	"endColumn": 45,
+	"origin": "extHost1"
+}]
+[{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/tests/test_app.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportGeneralTypeIssues",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportGeneralTypeIssues"
+		}
+	},
+	"severity": 8,
+	"message": "\"NoReturn\" is not iterable",
+	"source": "Pyright",
+	"startLineNumber": 208,
+	"startColumn": 27,
+	"endLineNumber": 208,
+	"endColumn": 48,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/laragon/www/streamlit_ulasan_bankjago/tests/test_app.py",
+	"owner": "Pyright",
+	"code": {
+		"value": "reportArgumentType",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pyright/blob/main/docs/configuration.md",
+			"scheme": "https",
+			"authority": "github.com",
+			"fragment": "reportArgumentType"
+		}
+	},
+	"severity": 8,
+	"message": "Argument of type \"Literal[2]\" cannot be assigned to parameter \"selected_month\" of type \"str\" in function \"filter_dashboard_data\"\n  \"Literal[2]\" is not assignable to \"str\"",
+	"source": "Pyright",
+	"startLineNumber": 491,
+	"startColumn": 61,
+	"endLineNumber": 491,
+	"endColumn": 62,
+	"origin": "extHost1"
+}]

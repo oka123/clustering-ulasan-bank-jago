@@ -1,6 +1,7 @@
 """Loader model IndoBERT & BERTopic serta fungsi inferensi sentimen dan topik."""
 
 import pickle
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -28,7 +29,7 @@ class DefaultBinaryLabelEncoder:
 
 
 @st.cache_resource
-def load_classifier():
+def load_classifier() -> tuple[Any, Any, Any, torch.device]:
     """Load IndoBERT classifier + tokenizer + label encoder."""
     from transformers import AutoModelForSequenceClassification, AutoTokenizer
 

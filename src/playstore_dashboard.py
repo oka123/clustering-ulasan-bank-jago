@@ -2,6 +2,7 @@
 
 from datetime import date, datetime
 from pathlib import Path
+from typing import Any, cast
 
 import pandas as pd
 
@@ -40,14 +41,15 @@ def scrape_playstore_reviews(
 
     for _ in range(max_pages):
         try:
-            batch, continuation_token = reviews(
-                app_id,
-                lang="id",
-                country="id",
-                sort=Sort.NEWEST,
-                count=100,
-                continuation_token=continuation_token,
-            )
+            review_kwargs: dict[str, Any] = {
+                "lang": "id",
+                "country": "id",
+                "sort": Sort.NEWEST,
+                "count": 100,
+            }
+            if continuation_token is not None:
+                review_kwargs["continuation_token"] = continuation_token
+            batch, continuation_token = reviews(app_id, **review_kwargs)
         except Exception as exc:
             raise RuntimeError(f"Gagal mengambil data dari Google Play Store: {exc}") from exc
 
@@ -121,14 +123,22 @@ def _normalize_dashboard_df(df: pd.DataFrame) -> pd.DataFrame:
     parsed_dt = parsed_dt.loc[work.index]
     work["tahun"] = parsed_dt.dt.year.astype(int)
     work["bulan"] = parsed_dt.dt.month.astype(int)
-    work["score"] = pd.to_numeric(work["score"], errors="coerce").fillna(0).astype(int)
+    work["score"] = (
+        pd.Series(pd.to_numeric(work["score"], errors="coerce"), index=work.index)
+        .fillna(0)
+        .astype(int)
+    )
     work["thumbsUpCount"] = (
-        pd.to_numeric(work["thumbsUpCount"], errors="coerce").fillna(0).astype(int)
+        pd.Series(pd.to_numeric(work["thumbsUpCount"], errors="coerce"), index=work.index)
+        .fillna(0)
+        .astype(int)
     )
     work["Keyakinan (%)"] = (
-        pd.to_numeric(work["Keyakinan (%)"], errors="coerce").fillna(0.0).astype(float)
+        pd.Series(pd.to_numeric(work["Keyakinan (%)"], errors="coerce"), index=work.index)
+        .fillna(0.0)
+        .astype(float)
     )
-    return work[DASHBOARD_COLUMNS].reset_index(drop=True)
+    return pd.DataFrame(work[DASHBOARD_COLUMNS]).reset_index(drop=True)
 
 
 def load_dashboard_cache(cache_path: Path = DASHBOARD_CACHE_PATH) -> pd.DataFrame:
@@ -196,19 +206,19 @@ def merge_dashboard_cache(existing_df: pd.DataFrame, new_df: pd.DataFrame) -> pd
 def filter_dashboard_data(
     df: pd.DataFrame,
     selected_year: int,
-    selected_month="Semua Bulan",
+    selected_month: int | str | None = "Semua Bulan",
     selected_sentiment: str = "Semua",
 ) -> pd.DataFrame:
     """Filter data Dashboard berdasarkan tahun (wajib), bulan (opsional), dan sentimen."""
     if df is None or df.empty:
         return pd.DataFrame(columns=DASHBOARD_COLUMNS)
 
-    filtered = df[df["tahun"] == int(selected_year)]
+    filtered = cast(pd.DataFrame, df[df["tahun"] == int(selected_year)])
     if selected_month is not None and selected_month != "Semua Bulan":
-        filtered = filtered[filtered["bulan"] == int(selected_month)]
+        filtered = cast(pd.DataFrame, filtered[filtered["bulan"] == int(selected_month)])
     if selected_sentiment and selected_sentiment != "Semua":
-        filtered = filtered[filtered["Sentimen"] == selected_sentiment]
-    return filtered.reset_index(drop=True)
+        filtered = cast(pd.DataFrame, filtered[filtered["Sentimen"] == selected_sentiment])
+    return pd.DataFrame(filtered).reset_index(drop=True)
 
 
 def summarize_dashboard_metrics(df: pd.DataFrame) -> dict:
@@ -227,24 +237,28 @@ def summarize_dashboard_metrics(df: pd.DataFrame) -> dict:
     total = len(df)
     pos_count = int((df["Sentimen"] == "Positif").sum())
     neg_count = int((df["Sentimen"] == "Negatif").sum())
-    avg_rating = float(df["score"].mean()) if "score" in df.columns else 0.0
+    score_series = pd.Series(pd.to_numeric(df["score"], errors="coerce")) if "score" in df.columns else pd.Series(dtype=float)
+    avg_rating = float(score_series.mean()) if not score_series.dropna().empty else 0.0
 
-    valid_topics = df[
-        df["Sentimen"].isin(["Positif", "Negatif"])
-        & ~df["Cluster"].isin(["-", "Outlier"])
-    ]
+    valid_topics = cast(
+        pd.DataFrame,
+        df[
+            df["Sentimen"].isin(["Positif", "Negatif"])
+            & ~df["Cluster"].isin(["-", "Outlier"])
+        ],
+    )
     if valid_topics.empty:
         top_topic = "-"
     else:
         top_group = (
-            valid_topics.groupby(["Cluster", "Nama Topik"], as_index=False)
-            .size()
-            .sort_values("size", ascending=False)
+            pd.DataFrame({"Jumlah Ulasan": valid_topics.groupby(["Cluster", "Nama Topik"]).size()})
+            .reset_index()
+            .sort_values("Jumlah Ulasan", ascending=False)
             .iloc[0]
         )
         top_topic = (
             f"{top_group['Cluster']} {top_group['Nama Topik']} "
-            f"({int(top_group['size']):,} ulasan)"
+            f"({int(top_group['Jumlah Ulasan']):,} ulasan)"
         )
 
     return {
@@ -264,18 +278,17 @@ def build_monthly_trend_df(df: pd.DataFrame) -> pd.DataFrame:
     if df is None or df.empty:
         return pd.DataFrame(columns=columns)
 
-    valid = df[df["Sentimen"].isin(["Positif", "Negatif"])]
+    valid = cast(pd.DataFrame, df[df["Sentimen"].isin(["Positif", "Negatif"])])
     if valid.empty:
         return pd.DataFrame(columns=columns)
 
     agg = (
-        valid.groupby(["bulan", "Sentimen"], as_index=False)
-        .size()
-        .rename(columns={"size": "Jumlah Ulasan"})
+        pd.DataFrame({"Jumlah Ulasan": valid.groupby(["bulan", "Sentimen"]).size()})
+        .reset_index()
         .sort_values("bulan")
     )
-    agg["bulan_label"] = agg["bulan"].map(lambda m: MONTH_SHORT_ID.get(int(m), str(m)))
-    return agg[columns].reset_index(drop=True)
+    agg["bulan_label"] = [MONTH_SHORT_ID.get(int(m), str(m)) for m in agg["bulan"]]
+    return pd.DataFrame(agg[columns]).reset_index(drop=True)
 
 
 def build_topic_ranking_df(df: pd.DataFrame) -> pd.DataFrame:
@@ -284,18 +297,19 @@ def build_topic_ranking_df(df: pd.DataFrame) -> pd.DataFrame:
     if df is None or df.empty:
         return pd.DataFrame(columns=columns)
 
-    valid = df[df["Sentimen"].isin(["Positif", "Negatif"])]
+    valid = cast(pd.DataFrame, df[df["Sentimen"].isin(["Positif", "Negatif"])])
     if valid.empty:
         return pd.DataFrame(columns=columns)
 
     agg = (
-        valid.groupby(["Sentimen", "Cluster", "Nama Topik"], as_index=False)
-        .size()
-        .rename(columns={"size": "Jumlah Ulasan"})
+        pd.DataFrame(
+            {"Jumlah Ulasan": valid.groupby(["Sentimen", "Cluster", "Nama Topik"]).size()}
+        )
+        .reset_index()
         .sort_values("Jumlah Ulasan", ascending=False)
     )
     agg["Label Topik"] = agg["Cluster"] + " - " + agg["Nama Topik"]
-    return agg[columns].reset_index(drop=True)
+    return pd.DataFrame(agg[columns]).reset_index(drop=True)
 
 
 def build_topic_monthly_trend_df(df: pd.DataFrame, top_n: int = 5) -> pd.DataFrame:
@@ -304,24 +318,65 @@ def build_topic_monthly_trend_df(df: pd.DataFrame, top_n: int = 5) -> pd.DataFra
     if df is None or df.empty:
         return pd.DataFrame(columns=columns)
 
-    valid = df[
-        df["Sentimen"].isin(["Positif", "Negatif"])
-        & ~df["Cluster"].isin(["-", "Outlier"])
-    ].copy()
+    valid = cast(
+        pd.DataFrame,
+        df[
+            df["Sentimen"].isin(["Positif", "Negatif"])
+            & ~df["Cluster"].isin(["-", "Outlier"])
+        ],
+    ).copy()
     if valid.empty:
         return pd.DataFrame(columns=columns)
 
     valid["Label Topik"] = (
         valid["Sentimen"] + " | " + valid["Cluster"] + " - " + valid["Nama Topik"]
     )
-    top_labels = valid["Label Topik"].value_counts().head(top_n).index.tolist()
-    filtered = valid[valid["Label Topik"].isin(top_labels)]
+    top_labels = pd.Series(valid["Label Topik"]).value_counts().head(top_n).index.tolist()
+    filtered = cast(pd.DataFrame, valid[valid["Label Topik"].isin(top_labels)])
 
     agg = (
-        filtered.groupby(["bulan", "Label Topik"], as_index=False)
-        .size()
-        .rename(columns={"size": "Jumlah Ulasan"})
+        pd.DataFrame({"Jumlah Ulasan": filtered.groupby(["bulan", "Label Topik"]).size()})
+        .reset_index()
         .sort_values("bulan")
     )
-    agg["bulan_label"] = agg["bulan"].map(lambda m: MONTH_SHORT_ID.get(int(m), str(m)))
-    return agg[columns].reset_index(drop=True)
+    agg["bulan_label"] = [MONTH_SHORT_ID.get(int(m), str(m)) for m in agg["bulan"]]
+    return pd.DataFrame(agg[columns]).reset_index(drop=True)
+
+
+def build_batch_distribution_df(result_df: pd.DataFrame) -> pd.DataFrame:
+    """Agregasi jumlah ulasan valid per sentimen dan cluster topik dari hasil batch."""
+    columns = ["Sentimen", "Cluster", "Nama Topik", "Label Topik", "Jumlah Ulasan"]
+    if result_df is None or result_df.empty:
+        return pd.DataFrame(columns=columns)
+
+    valid_df = cast(pd.DataFrame, result_df[result_df["Sentimen"].isin(["Positif", "Negatif"])])
+    if valid_df.empty:
+        return pd.DataFrame(columns=columns)
+
+    dist_df = (
+        pd.DataFrame(
+            {"Jumlah Ulasan": valid_df.groupby(["Sentimen", "Cluster", "Nama Topik"]).size()}
+        )
+        .reset_index()
+        .sort_values(["Jumlah Ulasan", "Sentimen"], ascending=[False, True])
+        .reset_index(drop=True)
+    )
+    dist_df["Label Topik"] = dist_df["Cluster"] + " - " + dist_df["Nama Topik"]
+    return pd.DataFrame(dist_df[columns])
+
+
+def filter_batch_results(
+    result_df: pd.DataFrame,
+    sentiment_filter: str = "Semua",
+    cluster_filter: str = "Semua",
+) -> pd.DataFrame:
+    """Filter hasil analisis batch berdasarkan sentimen dan label cluster."""
+    if result_df is None or result_df.empty:
+        return pd.DataFrame(result_df)
+
+    filtered = result_df
+    if sentiment_filter and sentiment_filter != "Semua":
+        filtered = cast(pd.DataFrame, filtered[filtered["Sentimen"] == sentiment_filter])
+    if cluster_filter and cluster_filter != "Semua":
+        filtered = cast(pd.DataFrame, filtered[filtered["Cluster"] == cluster_filter])
+    return pd.DataFrame(filtered).reset_index(drop=True)
