@@ -374,6 +374,44 @@ class TestApp(unittest.TestCase):
                     end_date=date(2026, 11, 25),
                 )
 
+        with self.assertRaises(ValueError):
+            app.scrape_playstore_reviews(
+                start_date=date(2026, 11, 1),
+                end_date=date(2026, 11, 25),
+                max_reviews=-1,
+            )
+
+    def test_scrape_playstore_reviews_unlimited_mode(self):
+        """Positive case: max_reviews=0 atau None mengambil semua halaman tanpa batas 50 halaman."""
+        from datetime import date, datetime
+
+        pages = [
+            (
+                [
+                    {
+                        "at": datetime(2026, 11, 20, 10, 0),
+                        "userName": f"User {idx}",
+                        "score": 5,
+                        "content": f"Bagus {idx}",
+                        "thumbsUpCount": 0,
+                    }
+                    for _ in range(12)
+                ],
+                f"tok_{idx + 1}" if idx < 54 else None,
+            )
+            for idx in range(55)
+        ]
+
+        with patch("google_play_scraper.reviews", side_effect=pages) as mock_reviews:
+            df = app.scrape_playstore_reviews(
+                start_date=date(2026, 11, 15),
+                end_date=date(2026, 11, 22),
+                max_reviews=0,
+            )
+
+        self.assertEqual(mock_reviews.call_count, 55)
+        self.assertEqual(len(df), 55 * 12)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -17,11 +17,14 @@ from src.config import (
 def scrape_playstore_reviews(
     start_date,
     end_date,
-    max_reviews: int = 100,
+    max_reviews: int | None = 100,
     app_id: str = PLAYSTORE_APP_ID,
     progress_callback=None,
 ) -> pd.DataFrame:
-    """Ambil ulasan dari Google Play Store dengan filter rentang tanggal inklusif."""
+    """Ambil ulasan dari Google Play Store dengan filter rentang tanggal inklusif.
+
+    Jika max_reviews bernilai None atau 0, seluruh ulasan pada rentang tanggal diambil tanpa batas.
+    """
     if isinstance(start_date, datetime):
         start_date = start_date.date()
     if isinstance(end_date, datetime):
@@ -29,17 +32,20 @@ def scrape_playstore_reviews(
 
     if start_date > end_date:
         raise ValueError("Tanggal mulai tidak boleh lebih besar daripada tanggal akhir.")
-    if max_reviews <= 0:
-        raise ValueError("Batas maksimal ulasan harus lebih dari 0.")
+    if max_reviews is not None and max_reviews < 0:
+        raise ValueError("Batas maksimal ulasan tidak boleh negatif.")
+
+    review_limit: int | None = (
+        None if (max_reviews is None or max_reviews == 0) else int(max_reviews)
+    )
 
     from google_play_scraper import Sort, reviews
 
     columns = ["tanggal", "userName", "score", "ulasan", "thumbsUpCount"]
     collected = []
     continuation_token = None
-    max_pages = 50  # Pengaman agar tidak looping tanpa batas pada rentang tanggal lampau
 
-    for _ in range(max_pages):
+    while True:
         try:
             review_kwargs: dict[str, Any] = {
                 "lang": "id",
@@ -81,15 +87,18 @@ def scrape_playstore_reviews(
                         "thumbsUpCount": int(item.get("thumbsUpCount", 0) or 0),
                     }
                 )
-                if len(collected) >= max_reviews:
+                if review_limit is not None and len(collected) >= review_limit:
                     break
 
         if progress_callback:
-            progress_callback(min(len(collected) / max_reviews, 0.95))
+            if review_limit is not None:
+                progress_callback(min(len(collected) / review_limit, 0.95))
+            else:
+                progress_callback(min(0.95, 1.0 - 1.0 / (1.0 + len(collected) / 500.0)))
 
         # Berhenti otomatis jika target tercapai, halaman habis, atau ulasan sudah lebih lama dari start_date
         if (
-            len(collected) >= max_reviews
+            (review_limit is not None and len(collected) >= review_limit)
             or continuation_token is None
             or (oldest_in_batch is not None and oldest_in_batch < start_date)
         ):

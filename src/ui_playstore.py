@@ -46,11 +46,11 @@ def render_playstore_tab(
     )
     max_reviews = int(
         p_col3.number_input(
-            "Maksimal Ulasan",
-            min_value=10,
-            max_value=500,
+            "Maksimal Ulasan (0 = Tanpa Batas)",
+            min_value=0,
             value=100,
             step=10,
+            help="Masukkan jumlah maksimal ulasan tanpa batas atas, atau isi 0 untuk mengambil seluruh ulasan pada rentang tanggal.",
             key="ps_max_reviews",
         )
     )

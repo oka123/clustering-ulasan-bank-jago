@@ -226,11 +226,11 @@ def _render_dashboard_sync_panel(
         )
         sync_limit = int(
             s_col3.number_input(
-                "Maksimal Ulasan per Sinkronisasi",
-                min_value=20,
-                max_value=500,
+                "Maksimal Ulasan (0 = Tanpa Batas)",
+                min_value=0,
                 value=150,
                 step=10,
+                help="Masukkan jumlah maksimal ulasan tanpa batas atas, atau isi 0 untuk mengambil seluruh ulasan pada rentang tanggal.",
                 key="dash_sync_limit",
             )
         )
